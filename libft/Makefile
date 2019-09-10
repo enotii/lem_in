@@ -3,30 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: caking <caking@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: caking <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/08/27 19:35:46 by jjory-ca          #+#    #+#              #
-#    Updated: 2019/09/10 19:48:08 by caking           ###   ########.fr        #
+#    Created: 2018/12/07 21:28:35 by caking            #+#    #+#              #
+#    Updated: 2018/12/07 21:47:09 by caking           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem-in
-LIBF = libft/
-GNL = gnl/get_next_line.c
-SRCS = src/
-CCFL = -Wall -Wextra -Werror -lncurses -ltermcap -L $(LIBF) -lft
-
+NAME = libft.a
+PATH_SRC = ./srcs
+SRC = $(PATH_SRC)/*.c
+HEADER = ./includes/libft.h
+OBJ =  *.o
 all: $(NAME)
-
 $(NAME):
-		@make -C $(LIBF) re
-		@gcc $(CCFL) $(SRCS)*.c $(GNL) -o $(NAME)
-
+	gcc -Wall -Wextra -Werror -c *.c -I libft.h
+	ar rc libft.a $(OBJ)
+	ranlib libft.a
 clean:
-		@make -C $(LIBF) clean
-
-fclean:
-		@make -C $(LIBF) fclean
-		@/bin/rm -rf $(NAME)
-
+	rm -rf *.o
+fclean: clean
+	rm -rf $(NAME)
 re: fclean all
+
+

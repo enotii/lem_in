@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjory-ca <jjory-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caking <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/27 19:33:11 by jjory-ca          #+#    #+#             */
-/*   Updated: 2019/08/27 19:40:21 by jjory-ca         ###   ########.fr       */
+/*   Created: 2018/12/10 22:11:48 by caking            #+#    #+#             */
+/*   Updated: 2018/12/10 23:11:29 by caking           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
+#include "libft.h"
 
+char	*ft_strncpy(char *dst, const char *src, size_t len)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (src[i] && i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
+}
