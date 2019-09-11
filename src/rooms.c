@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rooms.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caking <caking@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jjory-ca <jjory-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/30 20:05:49 by ashulha           #+#    #+#             */
-/*   Updated: 2019/09/10 19:51:27 by caking           ###   ########.fr       */
+/*   Created: 2019/09/11 14:46:13 by jjory-ca          #+#    #+#             */
+/*   Updated: 2019/09/11 15:18:32 by jjory-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	is_number(char **r, t_map *m, char *s)
+static void	is_number(char **r, t_map *map, char *s)
 {
 	int i;
 
@@ -22,31 +22,31 @@ static void	is_number(char **r, t_map *m, char *s)
 		while (s[++i])
 		{
 			if (!ft_isdigit(s[i]))
-				free_array(r, m, 1);
+				free_array(r, map, 1);
 		}
 	}
 	else
-		free_array(r, m, 1);
+		free_array(r, map, 1);
 }
 
-static void	validate_room(t_map *m, char *line)
+static void	validate_room(t_map *map, char *line)
 {
 	char **r;
 
 	r = ft_strsplit(line, ' ');
 	if (r[0][0] == 'L' || r[3] != NULL)
-		free_array(r, m, 1);
-	is_number(r, m, r[1]);
-	is_number(r, m, r[2]);
-	free_array(r, m, 0);
+		free_array(r, map, 1);
+	is_number(r, map, r[1]);
+	is_number(r, map, r[2]);
+	free_array(r, map, 0);
 }
 
-void		rooms(t_map *m, char *line)
+void		rooms(t_map *map, char *line)
 {
-	m->started = 2;
-	m->rooms_list = join_str(m->rooms_list, line, 0);
+	map->started = 2;
+	map->rooms_list = join_str(map->rooms_list, line, 0);
 	if (line[0] == '#')
 		return ;
-	validate_room(m, line);
-	m->q_rooms++;
+	validate_room(map, line);
+	map->q_rooms++;
 }

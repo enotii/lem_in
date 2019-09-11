@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caking <caking@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jjory-ca <jjory-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/30 20:10:44 by ashulha           #+#    #+#             */
-/*   Updated: 2019/09/10 19:55:11 by caking           ###   ########.fr       */
+/*   Created: 2019/09/11 14:46:53 by jjory-ca          #+#    #+#             */
+/*   Updated: 2019/09/11 15:10:43 by jjory-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	free_array(char **array, t_map *m, int error)
+void	free_array(char **array, t_map *map, int error)
 {
 	int i;
 
@@ -21,7 +21,7 @@ void	free_array(char **array, t_map *m, int error)
 		(array[i]) ? free(array[i++]) : 0;
 	free(array);
 	if (error)
-		exit_func(m, 1);
+		exit_func(map, 1);
 	array = NULL;
 }
 

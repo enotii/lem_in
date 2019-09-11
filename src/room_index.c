@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   room_index.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caking <caking@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jjory-ca <jjory-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/30 21:19:39 by ashulha           #+#    #+#             */
-/*   Updated: 2019/09/10 19:51:27 by caking           ###   ########.fr       */
+/*   Created: 2019/09/11 14:46:29 by jjory-ca          #+#    #+#             */
+/*   Updated: 2019/09/11 15:03:43 by jjory-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	room_index(t_map *m, char *room_name, int start)
+int	room_index(t_map *map, char *room_name, int start)
 {
 	int index;
 
 	index = (start) ? -1 : 0;
-	while (m->rooms[++index] && index < m->q_rooms)
+	while (map->rooms[++index] && index < map->q_rooms)
 	{
-		if (ft_strcmp(m->rooms[index], room_name) == 0)
+		if (ft_strcmp(map->rooms[index], room_name) == 0)
 			return (index);
 	}
 	return (index);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caking <caking@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jjory-ca <jjory-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 19:55:10 by jjory-ca          #+#    #+#             */
-/*   Updated: 2019/09/10 19:56:31 by caking           ###   ########.fr       */
+/*   Updated: 2019/09/11 15:20:46 by jjory-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,86 +24,86 @@ static int		is_empty(char *s)
 	return (0);
 }
 
-static t_map	*map_init_2(t_map *m)
+static t_map	*map_init_2(t_map *map)
 {
 	int i;
 	int j;
 
 	i = -1;
-	m->init_2 = 1;
-	m->path = (int*)ft_memalloc(sizeof(int) * 1000);
-	m->tab = (int**)ft_memalloc(sizeof(int*) * m->q_rooms);
-	m->rooms = (char**)ft_memalloc(sizeof(char*) * (m->q_rooms + 1));
-	while (++i < m->q_rooms)
+	map->init_2 = 1;
+	map->path = (int*)ft_memalloc(sizeof(int) * 1000);
+	map->tab = (int**)ft_memalloc(sizeof(int*) * map->q_rooms);
+	map->rooms = (char**)ft_memalloc(sizeof(char*) * (map->q_rooms + 1));
+	while (++i < map->q_rooms)
 	{
-		m->path[i] = -1;
-		m->rooms[i] = NULL;
-		m->tab[i] = (int*)ft_memalloc(sizeof(int) * m->q_rooms);
+		map->path[i] = -1;
+		map->rooms[i] = NULL;
+		map->tab[i] = (int*)ft_memalloc(sizeof(int) * map->q_rooms);
 		j = -1;
-		while (m->tab[i][++j])
-			m->tab[i][j] = 0;
+		while (map->tab[i][++j])
+			map->tab[i][j] = 0;
 	}
-	m->rooms[i] = NULL;
-	m->path[0] = 0;
-	return (m);
+	map->rooms[i] = NULL;
+	map->path[0] = 0;
+	return (map);
 }
 
-static void		read_map(t_map *m)
+static void		read_map(t_map *map)
 {
 	char *line;
 
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
-		if (m->ants == 0)
-			count_ants(m, line);
-		else if (ft_strchr(line, '-') || m->started == 3)
-			links(m, line);
-		else if ((m->started == 1 || m->started == 2) && !is_empty(line))
-			rooms(m, line);
+		if (map->ants == 0)
+			count_ants(map, line);
+		else if (ft_strchr(line, '-') || map->started == 3)
+			links(map, line);
+		else if ((map->started == 1 || map->started == 2) && !is_empty(line))
+			rooms(map, line);
 		else
-			exit_func(m, 1);
+			exit_func(map, 1);
 	}
-	if (!m->ants || !m->links[0])
-		exit_func(m, 1);
-	m = map_init_2(m);
+	if (!map->ants || !map->links[0])
+		exit_func(map, 1);
+	map = map_init_2(map);
 }
 
 static t_map	*map_init(void)
 {
-	t_map *m;
+	t_map *map;
 
-	m = (t_map*)ft_memalloc(sizeof(t_map));
-	m->links = ft_strnew(1);
-	m->ants_str = ft_strnew(1);
-	m->rooms_list = ft_strnew(1);
-	m->q_rooms = 0;
-	m->ants = 0;
-	m->started = 0;
-	m->curr_room = 0;
-	m->p_ind = 0;
-	m->init_2 = 0;
-	m->good[0] = 0;
-	m->good[1] = 0;
-	m->rooms = NULL;
-	m->tab = NULL;
-	m->path = NULL;
-	return (m);
+	map = (t_map*)ft_memalloc(sizeof(t_map));
+	map->links = ft_strnew(1);
+	map->ants_str = ft_strnew(1);
+	map->rooms_list = ft_strnew(1);
+	map->q_rooms = 0;
+	map->ants = 0;
+	map->started = 0;
+	map->curr_room = 0;
+	map->p_ind = 0;
+	map->init_2 = 0;
+	map->good[0] = 0;
+	map->good[1] = 0;
+	map->rooms = NULL;
+	map->tab = NULL;
+	map->path = NULL;
+	return (map);
 }
 
 int				main(void)
 {
-	t_map *m;
+	t_map *map;
 
-	m = map_init();
-	read_map(m);
-	add_rooms(m);
-	if (!m->good[0] || !m->good[1])
-		exit_func(m, 1);
-	create_tab(m);
-	print_matrix(m);
-	if (solution(m, 0))
-		result(m);
+	map = map_init();
+	read_map(map);
+	add_rooms(map);
+	if (!map->good[0] || !map->good[1])
+		exit_func(map, 1);
+	create_tab(map);
+	print_matrix(map);
+	if (solution(map, 0))
+		result(map);
 	else
-		exit_func(m, 1);
-	exit_func(m, 0);
+		exit_func(map, 1);
+	exit_func(map, 0);
 }

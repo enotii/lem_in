@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   count_ants.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caking <caking@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jjory-ca <jjory-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/30 20:20:17 by ashulha           #+#    #+#             */
-/*   Updated: 2019/09/10 19:51:16 by caking           ###   ########.fr       */
+/*   Created: 2019/09/11 14:47:05 by jjory-ca          #+#    #+#             */
+/*   Updated: 2019/09/11 15:20:11 by jjory-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	count_ants(t_map *m, char *line)
+void	count_ants(t_map *map, char *line)
 {
 	int		i;
 	char	*s;
 
 	i = 0;
-	m->started = 1;
-	m->ants_str = join_str(m->ants_str, line, 0);
+	map->started = 1;
+	map->ants_str = join_str(map->ants_str, line, 0);
 	if (line[0] == '#')
 		return ;
 	s = ft_strtrim(line);
-	if ((m->ants = ft_atoi(s)) <= 0)
-		exit_func(m, 1);
+	if ((map->ants = ft_atoi(s)) <= 0)
+		exit_func(map, 1);
 	while (s[i] != '\n' && s[i] != 0)
 	{
 		if (!ft_isdigit(s[i++]))
-			exit_func(m, 1);
+			exit_func(map, 1);
 	}
 }

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caking <caking@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jjory-ca <jjory-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/30 21:21:50 by ashulha           #+#    #+#             */
-/*   Updated: 2019/09/10 19:51:21 by caking           ###   ########.fr       */
+/*   Created: 2019/09/11 14:47:01 by jjory-ca          #+#    #+#             */
+/*   Updated: 2019/09/11 15:19:53 by jjory-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	validate_link(t_map *m, char *link)
+static void	validate_link(t_map *map, char *link)
 {
 	char **l;
 
 	l = ft_strsplit(link, '-');
 	if (l[2] != NULL)
-		free_array(l, m, 1);
-	free_array(l, m, 0);
+		free_array(l, map, 1);
+	free_array(l, map, 0);
 }
 
-void		create_tab(t_map *m)
+void		create_tab(t_map *map)
 {
 	int		i;
 	int		r_1;
@@ -31,22 +31,22 @@ void		create_tab(t_map *m)
 	char	**links;
 
 	i = -1;
-	links = ft_strsplit(m->links, '\n');
+	links = ft_strsplit(map->links, '\n');
 	while (links[++i])
 	{
 		if (links[i][0] == '#')
 			continue ;
-		validate_link(m, links[i]);
+		validate_link(map, links[i]);
 		l = ft_strsplit(links[i], '-');
-		if ((r_1 = room_index(m, l[0], 1)) >= m->q_rooms ||
-			(r_2 = room_index(m, l[1], 1)) >= m->q_rooms)
+		if ((r_1 = room_index(map, l[0], 1)) >= map->q_rooms ||
+			(r_2 = room_index(map, l[1], 1)) >= map->q_rooms)
 		{
-			free_array(l, m, 0);
-			free_array(links, m, 1);
+			free_array(l, map, 0);
+			free_array(links, map, 1);
 		}
-		(r_2) ? (m->tab[r_1][r_2] = 1) : 0;
-		(r_1) ? (m->tab[r_2][r_1] = 1) : 0;
-		free_array(l, m, 0);
+		(r_2) ? (map->tab[r_1][r_2] = 1) : 0;
+		(r_1) ? (map->tab[r_2][r_1] = 1) : 0;
+		free_array(l, map, 0);
 	}
-	free_array(links, m, 0);
+	free_array(links, map, 0);
 }
